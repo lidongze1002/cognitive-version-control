@@ -38,7 +38,7 @@ from eval.convergence_metrics import (  # noqa: E402
     validate_turns,
 )
 
-__version__ = "0.2.4"
+__version__ = "1.0.0"
 
 
 def load_raw(path: str | Path) -> List[Dict[str, Any]]:

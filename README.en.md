@@ -1,5 +1,9 @@
 # Cognitive Version Control (CVC)
 
+> **Status: closed (v1.0.0) — research preview, no longer maintained.**
+> Conclusion: CVC is a conflict-dependent scaffold, not a general revision fix.
+> Final report: [`docs/final-report.md`](docs/final-report.md)
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338017.svg)](https://doi.org/10.5281/zenodo.24338017)
 [![CI](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml/badge.svg)](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
@@ -10,7 +14,7 @@
 CVC is a lightweight specification for long LLM conversations:
 **facts get IDs, concepts get a ledger, assumptions can be revoked, and conclusions expire.**
 
-- Status: `v0.2.4-draft`
+- Status: `v1.0.0-final (archived)`
 - Docs license: **CC BY 4.0**
 - Code license: **MIT**
 - DOI: **10.5281/zenodo.24338017** (concept DOI; each version also has a version DOI)
@@ -127,6 +131,9 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 
 ## 8. Roadmap
 
+> The project is closed. Remaining items are not planned. For a continuation
+> plan, see [`docs/final-report.md`](docs/final-report.md), section 7.
+
 - [x] v0.1.0: spec, prompts, metrics script
 - [x] v0.1.1: tests, English docs, FAQ, issue templates
 - [x] v0.2.0: annotation tool, annotation guide, experiment protocol
@@ -144,7 +151,7 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.2.4). Zenodo.
+Ledgers for Long LLM Conversations (v1.0.0). Zenodo.
 https://doi.org/10.5281/zenodo.24338017
 ```
 

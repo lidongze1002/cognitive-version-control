@@ -1,5 +1,9 @@
 # Contributing
 
+> **This project is closed and archived (v1.0.0).**
+> Issues and pull requests are no longer accepted. The notes below are kept for
+> anyone who forks the work.
+
 Thanks for taking a look. This project is a draft and feedback is welcome.
 
 ## Ways to contribute

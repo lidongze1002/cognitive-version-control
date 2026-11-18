@@ -1,5 +1,9 @@
 # 认知版本控制 / Cognitive Version Control (CVC)
 
+> **状态：已结项（v1.0.0）— 研究预览，不再维护。**
+> 结论：CVC 是“冲突依赖的脚手架”，不是通用修订器。
+> 完整复盘：[`docs/final-report.md`](docs/final-report.md)
+
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338017.svg)](https://doi.org/10.5281/zenodo.24338017)
 [![CI](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml/badge.svg)](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
@@ -8,7 +12,7 @@
 
 CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有账本，假设可撤销，结论会过期。**
 
-- 状态：`v0.2.4-draft`
+- 状态：`v1.0.0-final（已归档）`
 - 文档许可：**CC BY 4.0**
 - 代码许可：**MIT**
 - DOI：**10.5281/zenodo.24338017**（concept DOI；每个版本另有 version DOI）
@@ -182,6 +186,9 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 
 ## 8. 路线图
 
+> 项目已结项，以下未完成项不再计划。继续研究的建议见
+> [`docs/final-report.md`](docs/final-report.md) 第 7 节。
+
 - [x] v0.1.0：规范草案 + prompt 模板 + 指标脚本
 - [x] v0.1.1：单元测试、英文文档、FAQ、issue/PR 模板
 - [x] v0.2.0：标注工具、标注手册、实验协议
@@ -199,7 +206,7 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.2.4). Zenodo.
+Ledgers for Long LLM Conversations (v1.0.0). Zenodo.
 https://doi.org/10.5281/zenodo.24338017
 ```
 
@@ -211,7 +218,7 @@ BibTeX：
   title        = {Cognitive Version Control: Fact, Concept, and Assumption
                   Ledgers for Long LLM Conversations},
   year         = {2026},
-  version      = {0.2.4},
+  version      = {1.0.0},
   doi          = {10.5281/zenodo.24338017},
   url          = {https://doi.org/10.5281/zenodo.24338017}
 }

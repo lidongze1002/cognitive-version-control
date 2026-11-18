@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.0] - 2026-11-18
+
+### Final
+
+- Added `docs/final-report.md`: what was built, tested, found, and what remains
+- README and README.en carry a **closed** banner
+- Specification frozen; no further changes planned
+- Repository archived (read-only)
+
+### Summary of findings
+
+- Conflict strength beats prompting: RMB C revised / A did not; gold both
+  declined; Nvidia both revised.
+- CVC cannot manufacture revision; it only makes willing revision explicit.
+- Over-revision remains a risk.
+- Concept reuse is annotation-sensitive; no evidence of increased diversity.
+
 ## [0.2.4] - 2026-11-18
 
 ### Added
