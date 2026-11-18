@@ -1,0 +1,157 @@
+[
+  {
+    "turn": 1,
+    "concepts": [
+      "实际利率",
+      "地缘",
+      "财政赤字",
+      "通胀",
+      "机会成本"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 2,
+    "concepts": [
+      "实际利率",
+      "地缘",
+      "央行购金",
+      "财政赤字",
+      "通胀",
+      "机会成本",
+      "避险"
+    ],
+    "facts_introduced": [
+      "F-001"
+    ],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 3,
+    "concepts": [
+      "实际利率",
+      "地缘",
+      "央行购金",
+      "财政赤字",
+      "通胀",
+      "避险",
+      "情景"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 4,
+    "concepts": [
+      "实际利率",
+      "地缘",
+      "通胀",
+      "机会成本",
+      "避险",
+      "配置"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 5,
+    "concepts": [
+      "实际利率",
+      "美元指数",
+      "地缘",
+      "央行购金",
+      "通胀",
+      "机会成本",
+      "避险",
+      "仓位"
+    ],
+    "facts_introduced": [
+      "F-002"
+    ],
+    "facts_revised": [],
+    "note": "回答“否”，未修订"
+  },
+  {
+    "turn": 6,
+    "concepts": [
+      "实际利率",
+      "美元指数",
+      "地缘",
+      "央行购金",
+      "避险",
+      "配置",
+      "仓位"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 7,
+    "concepts": [
+      "实际利率",
+      "美元指数",
+      "地缘",
+      "避险",
+      "获利了结",
+      "仓位"
+    ],
+    "facts_introduced": [
+      "F-003"
+    ],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 8,
+    "concepts": [
+      "实际利率",
+      "美元指数",
+      "地缘",
+      "央行购金",
+      "财政赤字",
+      "通胀",
+      "机会成本",
+      "避险",
+      "情景",
+      "仓位"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 9,
+    "concepts": [
+      "实际利率",
+      "美元指数",
+      "地缘",
+      "央行购金",
+      "情景",
+      "配置",
+      "定投",
+      "仓位"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 10,
+    "concepts": [
+      "实际利率",
+      "地缘",
+      "央行购金",
+      "获利了结",
+      "仓位"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  }
+]

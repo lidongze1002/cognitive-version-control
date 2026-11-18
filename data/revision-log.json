@@ -1,0 +1,32 @@
+{
+  "01-rmb-A": {
+    "revised": false,
+    "latency": null,
+    "evidence": "第 5/6 轮说“不矛盾”，把旧结论降级为“阶段性力量”，未标记过期"
+  },
+  "01-rmb-C": {
+    "revised": true,
+    "latency": 0,
+    "evidence": "第 5 轮说“部分推翻”，明确旧结论作废、错在把利差当主导"
+  },
+  "02-gold-A": {
+    "revised": false,
+    "latency": null,
+    "evidence": "第 5/6 轮说“不矛盾”“框架没有错，只是不完整”，未标记过期"
+  },
+  "02-gold-C": {
+    "revised": false,
+    "latency": null,
+    "evidence": "第 5 轮直接回答“否”，认为长期框架未被推翻"
+  },
+  "03-nvidia-A": {
+    "revised": true,
+    "latency": 0,
+    "evidence": "第 5 轮说“‘短期偏空’应该被推翻或至少大幅弱化”"
+  },
+  "03-nvidia-C": {
+    "revised": true,
+    "latency": 0,
+    "evidence": "第 5 轮说“部分”，明确旧结论作废、错在高估治理风险"
+  }
+}

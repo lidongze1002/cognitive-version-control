@@ -8,7 +8,7 @@
 
 CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有账本，假设可撤销，结论会过期。**
 
-- 状态：`v0.2.3-draft`
+- 状态：`v0.2.4-draft`
 - 文档许可：**CC BY 4.0**
 - 代码许可：**MIT**
 - DOI：**10.5281/zenodo.24338017**（concept DOI；每个版本另有 version DOI）
@@ -188,7 +188,8 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 - [x] v0.2.1：3 个实验脚本 + 运行清单
 - [x] v0.2.2：试跑 + 指标修复（修订时钟、无修订惩罚）
 - [x] v0.2.3：第一次真实 A/C 对比（DeepSeek，人民币）
-- [ ] v0.2.4：黄金与英伟达复现 + 第二标注者
+- [x] v0.2.4：三主题真实运行 + 修订日志
+- [ ] v0.2.5：强制承诺脚本 + 第二标注者盲标
 - [ ] v0.3.0：提供多模型适配（Claude / GPT / Gemini / 开源模型）
 - [ ] v0.4.0：对话分叉的参考实现（CLI）
 
@@ -198,7 +199,7 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.2.3). Zenodo.
+Ledgers for Long LLM Conversations (v0.2.4). Zenodo.
 https://doi.org/10.5281/zenodo.24338017
 ```
 
@@ -210,7 +211,7 @@ BibTeX：
   title        = {Cognitive Version Control: Fact, Concept, and Assumption
                   Ledgers for Long LLM Conversations},
   year         = {2026},
-  version      = {0.2.3},
+  version      = {0.2.4},
   doi          = {10.5281/zenodo.24338017},
   url          = {https://doi.org/10.5281/zenodo.24338017}
 }

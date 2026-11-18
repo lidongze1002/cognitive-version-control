@@ -10,7 +10,7 @@ abstract: >-
 authors:
   - family-names: "Li"
     given-names: "Dongze"
-version: 0.2.3
+version: 0.2.4
 date-released: 2026-11-18
 doi: "10.5281/zenodo.24338017"
 license: CC-BY-4.0

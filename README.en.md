@@ -10,7 +10,7 @@
 CVC is a lightweight specification for long LLM conversations:
 **facts get IDs, concepts get a ledger, assumptions can be revoked, and conclusions expire.**
 
-- Status: `v0.2.3-draft`
+- Status: `v0.2.4-draft`
 - Docs license: **CC BY 4.0**
 - Code license: **MIT**
 - DOI: **10.5281/zenodo.24338017** (concept DOI; each version also has a version DOI)
@@ -133,7 +133,8 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 - [x] v0.2.1: three experiment scripts + run sheet
 - [x] v0.2.2: pilot run + metric fixes (revision clock, no-revision penalty)
 - [x] v0.2.3: first real A/C run (DeepSeek, RMB)
-- [ ] v0.2.4: gold and Nvidia replication + second annotator
+- [x] v0.2.4: three-topic run + revision log
+- [ ] v0.2.5: forced-commitment scripts + blind second annotator
 - [ ] v0.3.0: multi-model adapters (Claude / GPT / Gemini / open models)
 - [ ] v0.4.0: reference CLI for conversation forking
 
@@ -143,7 +144,7 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.2.3). Zenodo.
+Ledgers for Long LLM Conversations (v0.2.4). Zenodo.
 https://doi.org/10.5281/zenodo.24338017
 ```
 

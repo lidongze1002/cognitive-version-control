@@ -1,44 +1,38 @@
 # Data
 
-Real API runs of the experiment scripts.
+Real API runs of the experiment scripts (2026-11-18).
 
-## Layout
+## Runs
 
-```text
-data/
-├── raw/
-│   ├── 01-rmb-A.jsonl        # baseline transcript
-│   ├── 01-rmb-C.jsonl        # CVC transcript
-│   ├── 01-rmb-A.meta.json    # model, temperature, usage
-│   └── 01-rmb-C.meta.json
-└── annotations/
-    ├── 01-rmb-A.json
-    └── 01-rmb-C.json
-```
+| Topic | Condition | File | Tokens |
+|---|---|---|---|
+| 01 RMB | A | `raw/01-rmb-A.jsonl` | 55,203 |
+| 01 RMB | C | `raw/01-rmb-C.jsonl` | 59,954 |
+| 02 Gold | A | `raw/02-gold-A.jsonl` | 44,035 |
+| 02 Gold | C | `raw/02-gold-C.jsonl` | 44,696 |
+| 03 Nvidia | A | `raw/03-nvidia-A.jsonl` | 53,491 |
+| 03 Nvidia | C | `raw/03-nvidia-C.jsonl` | 52,661 |
 
-## Run 01 — RMB
+Model: `deepseek-v4-pro`, temperature 0, reasoning effort low, max tokens 4000.
+Each transcript is 10 turns; each `.meta.json` records usage and settings.
 
-| Field | Value |
-|---|---|
-| Model | `deepseek-v4-pro` |
-| Temperature | 0 |
-| Reasoning effort | low |
-| Max tokens | 4000 |
-| Date | 2026-11-18 |
-| Turns | 10 per condition |
-| A system prompt | neutral, with current date pinned |
-| C system prompt | CVC reset rules, with current date pinned |
-| Tokens (A) | 49,175 |
-| Tokens (C) | 49,484 |
+## Prompts
 
-## Annotation
+Both conditions pin the current date (2026-11-18) and state that user-provided
+facts are to be treated as true even if they conflict with the model's training
+data. C adds the CVC reset rules.
 
-- One annotator (the author), **not blind** to condition.
-- Concepts restricted to a controlled vocabulary per topic; a concept is recorded once per turn.
-- `F-001` = the initial directional conclusion; `F-002` = the turn-5 contradicting data; `F-003` = the policy-tool interpretation.
-- Revision is recorded only when the response **explicitly** marks the old conclusion as overturned (`推翻` / `作废` / `过期`).
+## Annotations
 
-This is a **preliminary** annotation. A second, blind annotator is required before treating the numbers as evidence.
+- `annotations/01-rmb-A.json`, `annotations/01-rmb-C.json`
+  **Manual, frame-level annotation.** 2–5 concepts per turn.
+- `annotations/auto/*.json`
+  **Assisted keyword annotation**, produced by `experiments/auto_annotate.py`.
+  It over-counts domain terms (reuse ≈ 0.82 for every conversation) and is kept
+  only for reproducibility, **not** as a result.
+- `revision-log.json`
+  Manual judgment of whether each conversation explicitly revised its prior
+  conclusion, with evidence.
 
 ## Reproduce
 
@@ -47,7 +41,6 @@ set DEEPSEEK_API_KEY=...
 python experiments/run_deepseek.py --script experiments/scripts/01-rmb.json --condition A
 python experiments/run_deepseek.py --script experiments/scripts/01-rmb.json --condition C
 python eval/convergence_metrics.py --input data/annotations/01-rmb-A.json --json
-python eval/convergence_metrics.py --input data/annotations/01-rmb-C.json --json
 ```
 
 The API key is read from the environment and never written to disk.

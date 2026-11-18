@@ -1,0 +1,16 @@
+{
+  "script_id": "02-gold",
+  "condition": "C",
+  "model": "deepseek-v4-pro",
+  "temperature": 0.0,
+  "max_tokens": 4000,
+  "reasoning_effort": "low",
+  "started_at": "2026-11-18T13:51:29.201931+00:00",
+  "finished_at": "2026-11-18T13:56:16.075027+00:00",
+  "usage": {
+    "prompt_tokens": 29998,
+    "completion_tokens": 14698,
+    "total_tokens": 44696
+  },
+  "turns": 10
+}

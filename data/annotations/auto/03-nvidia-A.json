@@ -1,0 +1,171 @@
+[
+  {
+    "turn": 1,
+    "concepts": [
+      "出口管制",
+      "数据中心",
+      "需求",
+      "供应链",
+      "估值",
+      "客户",
+      "竞争",
+      "替代"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 2,
+    "concepts": [
+      "中国收入",
+      "数据中心",
+      "需求",
+      "客户",
+      "替代"
+    ],
+    "facts_introduced": [
+      "F-001"
+    ],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 3,
+    "concepts": [
+      "出口管制",
+      "中国收入",
+      "需求",
+      "治理",
+      "CEO",
+      "国会",
+      "供应链",
+      "估值",
+      "客户",
+      "竞争"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 4,
+    "concepts": [
+      "出口管制",
+      "中国收入",
+      "数据中心",
+      "需求",
+      "治理",
+      "CEO",
+      "国会",
+      "估值"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 5,
+    "concepts": [
+      "出口管制",
+      "中国收入",
+      "数据中心",
+      "需求",
+      "治理",
+      "CEO",
+      "国会",
+      "估值",
+      "财报",
+      "指引"
+    ],
+    "facts_introduced": [
+      "F-002"
+    ],
+    "facts_revised": [
+      "F-001"
+    ],
+    "note": ""
+  },
+  {
+    "turn": 6,
+    "concepts": [
+      "出口管制",
+      "中国收入",
+      "数据中心",
+      "需求",
+      "治理",
+      "供应链",
+      "估值",
+      "客户",
+      "竞争",
+      "财报"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 7,
+    "concepts": [
+      "出口管制",
+      "数据中心",
+      "CEO",
+      "国会",
+      "供应链",
+      "估值",
+      "客户",
+      "财报"
+    ],
+    "facts_introduced": [
+      "F-003"
+    ],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 8,
+    "concepts": [
+      "出口管制",
+      "数据中心",
+      "需求",
+      "治理",
+      "CEO",
+      "国会",
+      "估值",
+      "客户",
+      "财报",
+      "指引"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 9,
+    "concepts": [
+      "出口管制",
+      "数据中心",
+      "需求",
+      "治理",
+      "CEO",
+      "国会",
+      "供应链",
+      "客户",
+      "竞争",
+      "指引",
+      "替代"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  },
+  {
+    "turn": 10,
+    "concepts": [
+      "需求"
+    ],
+    "facts_introduced": [],
+    "facts_revised": [],
+    "note": ""
+  }
+]

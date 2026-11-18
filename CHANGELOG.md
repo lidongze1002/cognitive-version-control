@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4] - 2026-11-18
+
+### Added
+
+- Three-topic real run: RMB, gold, Nvidia (10 turns × 2 conditions each)
+- `data/revision-log.json`: manual judgment of explicit revision per conversation
+- `experiments/auto_annotate.py`: assisted keyword annotation (provisional)
+- `experiments/digest.py`: compact transcript digest for annotation
+
+### Changed
+
+- Both system prompts now pin the date and treat user-provided facts as true,
+  even when they conflict with the model's training data
+- `docs/results.md` rewritten with cross-topic revision results
+
+### Findings
+
+- **Conflict strength beats prompting**: RMB C revised / A did not; gold **both**
+  declined to revise; Nvidia **both** revised.
+- CVC cannot manufacture revision; it only makes willing revision explicit.
+- Over-revision remains (RMB C applied the rule to a policy explanation).
+- Keyword annotation inflates concept reuse to ~0.82; only RMB has manual
+  frame-level annotation.
+
 ## [0.2.3] - 2026-11-18
 
 ### Added
