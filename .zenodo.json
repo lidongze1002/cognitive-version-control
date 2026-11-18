@@ -1,0 +1,29 @@
+{
+  "title": "Cognitive Version Control: Fact, Concept, and Assumption Ledgers for Long LLM Conversations",
+  "description": "A lightweight specification and prompt toolkit for reducing premature convergence and belief-revision failure in long LLM conversations. It combines three ledgers (facts, concepts, assumptions), conversation forking, and three measurable metrics: concept reuse rate, frame entropy, and belief revision latency.",
+  "creators": [
+    {
+      "name": "YOUR NAME"
+    }
+  ],
+  "license": "cc-by-4.0",
+  "upload_type": "publication",
+  "publication_type": "technicalnote",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "LLM",
+    "context engineering",
+    "belief revision",
+    "mode collapse",
+    "agent memory",
+    "prompt engineering"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/YOUR-GITHUB-USERNAME/cognitive-version-control",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}

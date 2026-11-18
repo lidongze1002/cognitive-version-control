@@ -1,0 +1,18 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Run metrics demo
+        run: python eval/convergence_metrics.py --demo
+      - name: Validate JSON metadata
+        run: python -c "import json;json.load(open('.zenodo.json', encoding='utf-8'));print('zenodo ok')"
