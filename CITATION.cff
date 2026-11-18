@@ -11,6 +11,7 @@ authors:
     given-names: "Dongze"
 version: 0.1.0
 date-released: 2026-11-18
+doi: "10.5281/zenodo.24338018"
 license: CC-BY-4.0
 repository-code: "https://github.com/lidongze1002/cognitive-version-control"
 url: "https://github.com/lidongze1002/cognitive-version-control"

@@ -1,5 +1,7 @@
 # 认知版本控制 / Cognitive Version Control (CVC)
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338018.svg)](https://doi.org/10.5281/zenodo.24338018)
+
 > 长对话真正的问题不是“记不住”，而是“**不肯改**”。
 
 CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有账本，假设可撤销，结论会过期。**
@@ -7,7 +9,7 @@ CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有
 - 状态：`v0.1.0-draft`
 - 文档许可：**CC BY 4.0**
 - 代码许可：**MIT**
-- DOI：发布到 Zenodo 后补充
+- DOI：**10.5281/zenodo.24338018**
 - 作者：Dongze Li（GitHub: [@lidongze1002](https://github.com/lidongze1002)）
 
 ---
