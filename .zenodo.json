@@ -3,7 +3,7 @@
   "description": "A lightweight specification and prompt toolkit for reducing premature convergence and belief-revision failure in long LLM conversations. It combines three ledgers (facts, concepts, assumptions), conversation forking, and three measurable metrics: concept reuse rate, frame entropy, and belief revision latency.",
   "creators": [
     {
-      "name": "YOUR NAME"
+      "name": "Li, Dongze"
     }
   ],
   "license": "cc-by-4.0",
@@ -21,7 +21,7 @@
   ],
   "related_identifiers": [
     {
-      "identifier": "https://github.com/YOUR-GITHUB-USERNAME/cognitive-version-control",
+      "identifier": "https://github.com/lidongze1002/cognitive-version-control",
       "relation": "isSupplementTo",
       "scheme": "url"
     }

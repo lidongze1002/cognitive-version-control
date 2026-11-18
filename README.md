@@ -8,7 +8,7 @@ CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有
 - 文档许可：**CC BY 4.0**
 - 代码许可：**MIT**
 - DOI：发布到 Zenodo 后补充
-- 作者：`<YOUR NAME>`（发布前请修改 `CITATION.cff` 与 `.zenodo.json`）
+- 作者：Dongze Li（GitHub: [@lidongze1002](https://github.com/lidongze1002)）
 
 ---
 
