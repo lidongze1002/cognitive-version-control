@@ -10,7 +10,7 @@
 CVC is a lightweight specification for long LLM conversations:
 **facts get IDs, concepts get a ledger, assumptions can be revoked, and conclusions expire.**
 
-- Status: `v0.2.1-draft`
+- Status: `v0.2.2-draft`
 - Docs license: **CC BY 4.0**
 - Code license: **MIT**
 - DOI: **10.5281/zenodo.24338017** (concept DOI; each version also has a version DOI)
@@ -99,6 +99,7 @@ FAQ (originality, RAG, commercial use): [`docs/faq.md`](docs/faq.md).
 - Annotation tool: `python eval/annotate.py --template raw.jsonl --out annotation.json`
 - **Ready-made scripts**: [`experiments/scripts/`](experiments/scripts/) (RMB, gold, Nvidia; 10 turns each)
 - Run sheet: [`experiments/run_sheet.md`](experiments/run_sheet.md)
+- Pilot review (simulated, not evidence): [`docs/pilot-results.md`](docs/pilot-results.md)
 
 ---
 
@@ -129,7 +130,8 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 - [x] v0.1.1: tests, English docs, FAQ, issue templates
 - [x] v0.2.0: annotation tool, annotation guide, experiment protocol
 - [x] v0.2.1: three experiment scripts + run sheet
-- [ ] v0.2.2: 20 annotated conversations + baseline results
+- [x] v0.2.2: pilot run + metric fixes (revision clock, no-revision penalty)
+- [ ] v0.2.3: 20 annotated conversations + baseline results
 - [ ] v0.3.0: multi-model adapters (Claude / GPT / Gemini / open models)
 - [ ] v0.4.0: reference CLI for conversation forking
 
@@ -139,7 +141,7 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.2.1). Zenodo.
+Ledgers for Long LLM Conversations (v0.2.2). Zenodo.
 https://doi.org/10.5281/zenodo.24338017
 ```
 

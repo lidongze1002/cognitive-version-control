@@ -33,7 +33,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
 
 
 class InputError(ValueError):
@@ -133,30 +133,37 @@ def frame_entropy(turns: Iterable[Dict[str, Any]], normalized: bool = True) -> f
 
 
 def belief_revision_latency(turns: Iterable[Dict[str, Any]]) -> Optional[float]:
-    """Average turns between a fact's introduction and its first revision.
+    """Average delay between the latest new fact and a revision.
 
-    A revision on the same turn counts as 0. Returns None if no revision.
-    Duplicate revisions are counted once. Revisions of unknown facts are
-    ignored here; see revision_diagnostics().
+    For every fact that was revised, the clock starts at the most recent turn
+    (at or before the revision) on which *any* fact was introduced. This
+    measures "did the model revise when the contradicting evidence arrived?",
+    not "how old is the belief?".
+
+    A revision on the same turn as the new fact counts as 0. Returns None if
+    no revision happened.
     """
-    introduced: Dict[str, int] = {}
+    fact_turns: List[int] = []
     first_revision: Dict[str, int] = {}
 
     for turn in turns:
         turn_no = int(turn.get("turn", 0))
-        for fact_id in turn.get("facts_introduced", []):
-            introduced.setdefault(fact_id, turn_no)
+        for _fact_id in turn.get("facts_introduced", []):
+            fact_turns.append(turn_no)
         for fact_id in turn.get("facts_revised", []):
             first_revision.setdefault(fact_id, turn_no)
 
-    latencies = [
-        first_revision[fact_id] - introduced[fact_id]
-        for fact_id in first_revision
-        if fact_id in introduced
-    ]
-    if not latencies:
+    if not first_revision:
         return None
-    return sum(latencies) / len(latencies)
+
+    latencies: List[float] = []
+    for revision_turn in first_revision.values():
+        candidates = [t for t in fact_turns if t <= revision_turn]
+        if not candidates:
+            continue
+        latencies.append(revision_turn - max(candidates))
+
+    return sum(latencies) / len(latencies) if latencies else None
 
 
 def revision_diagnostics(turns: Iterable[Dict[str, Any]]) -> Dict[str, List[str]]:
@@ -184,14 +191,16 @@ def summarize(turns: List[Dict[str, Any]]) -> Dict[str, Any]:
     reuse = concept_reuse_rate(turns)
     entropy = frame_entropy(turns)
     latency = belief_revision_latency(turns)
+    diagnostics = revision_diagnostics(turns)
+    has_introduced = any(t.get("facts_introduced") for t in turns)
 
     if latency is None:
-        score_latency = 0.5
+        # Never revising is worse than revising late.
+        score_latency = 0.0 if has_introduced else 0.5
     else:
         score_latency = max(0.0, 1.0 - latency / 3.0)
 
     score = 0.4 * (1 - reuse) + 0.3 * entropy + 0.3 * score_latency
-    diagnostics = revision_diagnostics(turns)
 
     return {
         "turns": len(turns),
@@ -199,7 +208,7 @@ def summarize(turns: List[Dict[str, Any]]) -> Dict[str, Any]:
         "frame_entropy": round(entropy, 4),
         "belief_revision_latency": None if latency is None else round(latency, 2),
         "cvc_score": round(score, 4),
-        "warnings": _warnings(reuse, entropy, latency, diagnostics),
+        "warnings": _warnings(reuse, entropy, latency, diagnostics, has_introduced),
         "diagnostics": diagnostics,
     }
 
@@ -209,6 +218,7 @@ def _warnings(
     entropy: float,
     latency: Optional[float],
     diagnostics: Dict[str, List[str]],
+    has_introduced: bool,
 ) -> List[str]:
     out: List[str] = []
     if reuse > 0.6:
@@ -219,6 +229,8 @@ def _warnings(
         out.append("frame_entropy < 0.5: frames are too concentrated.")
     if latency is not None and latency >= 3:
         out.append("belief_revision_latency >= 3: belief stickiness, run reset protocol.")
+    if latency is None and has_introduced:
+        out.append("no revisions recorded despite introduced facts.")
     if diagnostics["orphan_revisions"]:
         out.append(
             "orphan revisions (revised but never introduced): "
@@ -232,7 +244,7 @@ BAD_DEMO = [
     {"turn": 2, "concepts": ["利差", "水池"], "facts_introduced": [], "facts_revised": []},
     {"turn": 3, "concepts": ["利差", "水池", "拔河"], "facts_introduced": [], "facts_revised": []},
     {"turn": 4, "concepts": ["利差", "拔河"], "facts_introduced": [], "facts_revised": []},
-    {"turn": 5, "concepts": ["利差", "水位差"], "facts_introduced": ["F-017"], "facts_revised": ["F-012"]},
+    {"turn": 5, "concepts": ["利差", "水位差"], "facts_introduced": ["F-017"], "facts_revised": []},
 ]
 
 GOOD_DEMO = [

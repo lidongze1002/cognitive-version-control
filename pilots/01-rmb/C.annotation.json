@@ -1,0 +1,8 @@
+[
+  {"turn": 1, "concepts": ["利差", "贸易顺差", "美元指数", "风险溢价"], "facts_introduced": [], "facts_revised": [], "note": ""},
+  {"turn": 2, "concepts": ["利差", "资本流动", "套息交易"], "facts_introduced": ["F-001"], "facts_revised": [], "note": "F-001：贬值压力"},
+  {"turn": 3, "concepts": ["贸易顺差", "结汇"], "facts_introduced": [], "facts_revised": [], "note": ""},
+  {"turn": 4, "concepts": ["贸易顺差", "利差"], "facts_introduced": [], "facts_revised": [], "note": "A-001：顺差是关键变量，待验证"},
+  {"turn": 5, "concepts": ["贸易顺差", "美元指数", "风险溢价"], "facts_introduced": ["F-002"], "facts_revised": ["F-001"], "note": "同轮修订"},
+  {"turn": 6, "concepts": ["推力", "拉力", "拔河"], "facts_introduced": [], "facts_revised": [], "note": ""}
+]

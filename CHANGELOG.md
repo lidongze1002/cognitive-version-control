@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2026-11-18
+
+### Added
+
+- Pilot run (`pilots/01-rmb/`), clearly marked as **simulated, not evidence**
+- Pilot review (`docs/pilot-results.md`)
+
+### Fixed
+
+- **Revision clock**: latency now starts when the latest contradicting fact
+  arrives, not when the old belief was first stated.
+- **No-revision penalty**: if facts were introduced but none was revised,
+  the latency component now scores `0` instead of a neutral `0.5`.
+
+### Changed
+
+- `BAD_DEMO` no longer revises, so it is a true negative case
+- `GOOD_DEMO` latency is now `0.0` (same-turn revision)
+- `docs/metrics.md` and `SPEC.md` describe the new clock
+- Metric tests updated; 36 tests total
+
 ## [0.2.1] - 2026-11-18
 
 ### Added

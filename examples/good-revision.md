@@ -36,7 +36,7 @@ A-003 | 利差是影响人民币的主要变量 | status: refuted | 若不成立
 ```text
 concept_reuse_rate       = 0.33   （引入了水池、拔河、水位差）
 frame_entropy            = 0.96
-belief_revision_latency  = 1      （第 6 轮出现，第 6 轮修订）
+belief_revision_latency  = 0      （第 6 轮出现，第 6 轮修订）
 ```
 
 ## 为什么这是“正例”

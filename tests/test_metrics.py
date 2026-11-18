@@ -48,10 +48,10 @@ class EntropyTest(unittest.TestCase):
 
 class LatencyTest(unittest.TestCase):
     def test_bad_demo(self):
-        self.assertEqual(belief_revision_latency(BAD_DEMO), 4.0)
+        self.assertIsNone(belief_revision_latency(BAD_DEMO))
 
     def test_good_demo(self):
-        self.assertEqual(belief_revision_latency(GOOD_DEMO), 1.0)
+        self.assertEqual(belief_revision_latency(GOOD_DEMO), 0.0)
 
     def test_same_turn(self):
         turns = [
@@ -67,6 +67,15 @@ class LatencyTest(unittest.TestCase):
         ]
         self.assertEqual(belief_revision_latency(turns), 1.0)
 
+    def test_late_revision_without_new_fact(self):
+        turns = [
+            {"turn": 1, "facts_introduced": ["F-1"], "facts_revised": []},
+            {"turn": 2, "facts_introduced": [], "facts_revised": []},
+            {"turn": 3, "facts_introduced": [], "facts_revised": []},
+            {"turn": 4, "facts_introduced": [], "facts_revised": ["F-1"]},
+        ]
+        self.assertEqual(belief_revision_latency(turns), 3.0)
+
     def test_no_revision(self):
         turns = [{"turn": 1, "facts_introduced": ["F-1"], "facts_revised": []}]
         self.assertIsNone(belief_revision_latency(turns))
@@ -75,7 +84,7 @@ class LatencyTest(unittest.TestCase):
 class DiagnosticsTest(unittest.TestCase):
     def test_unrevised(self):
         diag = revision_diagnostics(BAD_DEMO)
-        self.assertEqual(diag["unrevised_facts"], ["F-017"])
+        self.assertEqual(diag["unrevised_facts"], ["F-012", "F-017"])
         self.assertEqual(diag["orphan_revisions"], [])
 
     def test_orphan_revision(self):
@@ -129,11 +138,12 @@ class SummaryTest(unittest.TestCase):
         self.assertEqual(result["turns"], 5)
         self.assertAlmostEqual(result["cvc_score"], 0.4241, places=3)
         self.assertTrue(any("fixation" in w for w in result["warnings"]))
-        self.assertTrue(any("stickiness" in w for w in result["warnings"]))
+        self.assertTrue(any("no revisions" in w for w in result["warnings"]))
 
     def test_good_demo_has_no_latency_warning(self):
         result = summarize(validate_turns(GOOD_DEMO))
         self.assertFalse(any("stickiness" in w for w in result["warnings"]))
+        self.assertEqual(result["belief_revision_latency"], 0.0)
 
 
 if __name__ == "__main__":
