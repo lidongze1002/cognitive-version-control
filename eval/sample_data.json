@@ -1,0 +1,32 @@
+[
+  {
+    "turn": 1,
+    "concepts": ["利差"],
+    "facts_introduced": ["F-012"],
+    "facts_revised": []
+  },
+  {
+    "turn": 2,
+    "concepts": ["利差", "水池"],
+    "facts_introduced": [],
+    "facts_revised": []
+  },
+  {
+    "turn": 3,
+    "concepts": ["利差", "水池", "拔河"],
+    "facts_introduced": [],
+    "facts_revised": []
+  },
+  {
+    "turn": 4,
+    "concepts": ["利差", "拔河"],
+    "facts_introduced": [],
+    "facts_revised": []
+  },
+  {
+    "turn": 5,
+    "concepts": ["利差", "水位差"],
+    "facts_introduced": ["F-017"],
+    "facts_revised": ["F-012"]
+  }
+]

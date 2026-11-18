@@ -5,18 +5,20 @@
 Three metrics:
   1. concept_reuse_rate       -- how often concepts repeat
   2. frame_entropy            -- normalized Shannon entropy of concept usage
-  3. belief_revision_latency  -- turns between a new fact and its revision
+  3. belief_revision_latency  -- turns between a new fact and its first revision
 
 No third-party dependencies.
 
 Usage:
     python eval/convergence_metrics.py --demo
-    python eval/convergence_metrics.py --input data.json
+    python eval/convergence_metrics.py --demo-good
+    python eval/convergence_metrics.py --input eval/sample_data.json
     python eval/convergence_metrics.py --input data.json --json
+    python eval/convergence_metrics.py --input data.json --markdown
 
 Input format (list of turns):
 [
-  {"turn": 1, "concepts": ["利差"], "facts_introduced": [], "facts_revised": []},
+  {"turn": 1, "concepts": ["利差"], "facts_introduced": ["F-012"], "facts_revised": []},
   {"turn": 2, "concepts": ["利差", "水池"], "facts_introduced": ["F-017"], "facts_revised": ["F-012"]}
 ]
 """
@@ -26,8 +28,73 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import sys
 from collections import Counter
+from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
+
+__version__ = "0.1.1"
+
+
+class InputError(ValueError):
+    """Raised when the input JSON does not match the expected schema."""
+
+
+def _require_str_list(value: Any, field: str, index: int) -> List[str]:
+    if value is None:
+        return []
+    if not isinstance(value, list) or not all(isinstance(x, str) for x in value):
+        raise InputError(f"turn[{index}].{field} must be a list of strings")
+    return value
+
+
+def validate_turns(data: Any) -> List[Dict[str, Any]]:
+    """Validate and normalize a list of turns.
+
+    Raises InputError with a precise message on the first problem found.
+    """
+    if not isinstance(data, list):
+        raise InputError("top-level JSON must be a list of turns")
+    if not data:
+        raise InputError("turn list is empty")
+
+    normalized: List[Dict[str, Any]] = []
+    seen_turns = set()
+
+    for index, item in enumerate(data):
+        if not isinstance(item, dict):
+            raise InputError(f"turn[{index}] must be an object")
+
+        turn = item.get("turn")
+        if isinstance(turn, bool) or not isinstance(turn, int) or turn < 0:
+            raise InputError(f"turn[{index}].turn must be a non-negative integer")
+        if turn in seen_turns:
+            raise InputError(f"duplicate turn number: {turn}")
+        seen_turns.add(turn)
+
+        concepts = _require_str_list(item.get("concepts", []), "concepts", index)
+        introduced = _require_str_list(
+            item.get("facts_introduced", []), "facts_introduced", index
+        )
+        revised = _require_str_list(
+            item.get("facts_revised", []), "facts_revised", index
+        )
+
+        normalized.append(
+            {
+                "turn": turn,
+                "concepts": concepts,
+                "facts_introduced": introduced,
+                "facts_revised": revised,
+            }
+        )
+
+    return sorted(normalized, key=lambda x: x["turn"])
+
+
+def load_turns(path: str | Path) -> List[Dict[str, Any]]:
+    with open(path, encoding="utf-8") as fh:
+        return validate_turns(json.load(fh))
 
 
 def concept_reuse_rate(turns: Iterable[Dict[str, Any]]) -> float:
@@ -66,22 +133,51 @@ def frame_entropy(turns: Iterable[Dict[str, Any]], normalized: bool = True) -> f
 
 
 def belief_revision_latency(turns: Iterable[Dict[str, Any]]) -> Optional[float]:
-    """Average turns between a fact's introduction and its revision.
+    """Average turns between a fact's introduction and its first revision.
 
     A revision on the same turn counts as 0. Returns None if no revision.
+    Duplicate revisions are counted once. Revisions of unknown facts are
+    ignored here; see revision_diagnostics().
     """
     introduced: Dict[str, int] = {}
-    latencies: List[float] = []
+    first_revision: Dict[str, int] = {}
+
     for turn in turns:
         turn_no = int(turn.get("turn", 0))
         for fact_id in turn.get("facts_introduced", []):
             introduced.setdefault(fact_id, turn_no)
         for fact_id in turn.get("facts_revised", []):
-            if fact_id in introduced:
-                latencies.append(turn_no - introduced[fact_id])
+            first_revision.setdefault(fact_id, turn_no)
+
+    latencies = [
+        first_revision[fact_id] - introduced[fact_id]
+        for fact_id in first_revision
+        if fact_id in introduced
+    ]
     if not latencies:
         return None
     return sum(latencies) / len(latencies)
+
+
+def revision_diagnostics(turns: Iterable[Dict[str, Any]]) -> Dict[str, List[str]]:
+    """Return facts that were never revised and revisions of unknown facts."""
+    introduced: Dict[str, int] = {}
+    revised = set()
+    orphan = set()
+
+    for turn in turns:
+        for fact_id in turn.get("facts_introduced", []):
+            introduced.setdefault(fact_id, int(turn.get("turn", 0)))
+        for fact_id in turn.get("facts_revised", []):
+            if fact_id in introduced:
+                revised.add(fact_id)
+            else:
+                orphan.add(fact_id)
+
+    return {
+        "unrevised_facts": sorted(f for f in introduced if f not in revised),
+        "orphan_revisions": sorted(orphan),
+    }
 
 
 def summarize(turns: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -95,6 +191,7 @@ def summarize(turns: List[Dict[str, Any]]) -> Dict[str, Any]:
         score_latency = max(0.0, 1.0 - latency / 3.0)
 
     score = 0.4 * (1 - reuse) + 0.3 * entropy + 0.3 * score_latency
+    diagnostics = revision_diagnostics(turns)
 
     return {
         "turns": len(turns),
@@ -102,24 +199,35 @@ def summarize(turns: List[Dict[str, Any]]) -> Dict[str, Any]:
         "frame_entropy": round(entropy, 4),
         "belief_revision_latency": None if latency is None else round(latency, 2),
         "cvc_score": round(score, 4),
-        "warnings": _warnings(reuse, entropy, latency),
+        "warnings": _warnings(reuse, entropy, latency, diagnostics),
+        "diagnostics": diagnostics,
     }
 
 
-def _warnings(reuse: float, entropy: float, latency: Optional[float]) -> List[str]:
+def _warnings(
+    reuse: float,
+    entropy: float,
+    latency: Optional[float],
+    diagnostics: Dict[str, List[str]],
+) -> List[str]:
     out: List[str] = []
     if reuse > 0.6:
-        out.append("概念复用率 > 0.6：严重固化，建议强制更换框架。")
+        out.append("concept_reuse_rate > 0.6: severe fixation, force new frames.")
     elif reuse > 0.4:
-        out.append("概念复用率 > 0.4：开始固着，建议提示换框架。")
+        out.append("concept_reuse_rate > 0.4: fixation starting, suggest new frames.")
     if entropy < 0.5:
-        out.append("框架熵 < 0.5：框架过于集中。")
+        out.append("frame_entropy < 0.5: frames are too concentrated.")
     if latency is not None and latency >= 3:
-        out.append("信念修订延迟 >= 3 轮：存在信念粘性，建议执行重置协议。")
+        out.append("belief_revision_latency >= 3: belief stickiness, run reset protocol.")
+    if diagnostics["orphan_revisions"]:
+        out.append(
+            "orphan revisions (revised but never introduced): "
+            + ", ".join(diagnostics["orphan_revisions"])
+        )
     return out
 
 
-DEMO = [
+BAD_DEMO = [
     {"turn": 1, "concepts": ["利差"], "facts_introduced": ["F-012"], "facts_revised": []},
     {"turn": 2, "concepts": ["利差", "水池"], "facts_introduced": [], "facts_revised": []},
     {"turn": 3, "concepts": ["利差", "水池", "拔河"], "facts_introduced": [], "facts_revised": []},
@@ -127,38 +235,80 @@ DEMO = [
     {"turn": 5, "concepts": ["利差", "水位差"], "facts_introduced": ["F-017"], "facts_revised": ["F-012"]},
 ]
 
+GOOD_DEMO = [
+    {"turn": 1, "concepts": ["利差"], "facts_introduced": ["F-012"], "facts_revised": []},
+    {"turn": 2, "concepts": ["利差", "水池"], "facts_introduced": ["F-017"], "facts_revised": ["F-012"]},
+    {"turn": 3, "concepts": ["水池", "拔河", "水位差"], "facts_introduced": [], "facts_revised": []},
+]
+
+
+def _print_text(result: Dict[str, Any]) -> None:
+    print(f"CVC metrics (v{__version__})")
+    print("-----------")
+    for key in (
+        "turns",
+        "concept_reuse_rate",
+        "frame_entropy",
+        "belief_revision_latency",
+        "cvc_score",
+    ):
+        print(f"{key}: {result[key]}")
+    print(f"unrevised_facts: {result['diagnostics']['unrevised_facts']}")
+    if result["warnings"]:
+        print("\nWarnings:")
+        for warning in result["warnings"]:
+            print(f"- {warning}")
+
+
+def _print_markdown(result: Dict[str, Any]) -> None:
+    print("| metric | value |")
+    print("|---|---|")
+    for key in (
+        "turns",
+        "concept_reuse_rate",
+        "frame_entropy",
+        "belief_revision_latency",
+        "cvc_score",
+    ):
+        print(f"| `{key}` | {result[key]} |")
+    if result["warnings"]:
+        print("\n**Warnings**")
+        for warning in result["warnings"]:
+            print(f"- {warning}")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="CVC convergence metrics")
     parser.add_argument("--input", help="JSON file with a list of turns")
-    parser.add_argument("--demo", action="store_true", help="run built-in demo data")
+    parser.add_argument("--demo", action="store_true", help="run the bad-case demo")
+    parser.add_argument("--demo-good", action="store_true", help="run the good-case demo")
     parser.add_argument("--json", action="store_true", help="print JSON only")
+    parser.add_argument("--markdown", action="store_true", help="print a Markdown table")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     args = parser.parse_args()
 
-    if args.demo:
-        turns = DEMO
-    elif args.input:
-        with open(args.input, encoding="utf-8") as fh:
-            turns = json.load(fh)
-    else:
-        parser.error("use --demo or --input")
+    try:
+        if args.demo:
+            turns = validate_turns(BAD_DEMO)
+        elif args.demo_good:
+            turns = validate_turns(GOOD_DEMO)
+        elif args.input:
+            turns = load_turns(args.input)
+        else:
+            parser.error("use --demo, --demo-good, or --input")
+            return
+    except (InputError, json.JSONDecodeError, OSError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        raise SystemExit(2)
 
     result = summarize(turns)
 
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))
-        return
-
-    print("CVC metrics")
-    print("-----------")
-    for key, value in result.items():
-        if key == "warnings":
-            continue
-        print(f"{key}: {value}")
-    if result["warnings"]:
-        print("\nWarnings:")
-        for warning in result["warnings"]:
-            print(f"- {warning}")
+    elif args.markdown:
+        _print_markdown(result)
+    else:
+        _print_text(result)
 
 
 if __name__ == "__main__":

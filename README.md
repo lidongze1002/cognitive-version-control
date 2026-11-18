@@ -1,16 +1,19 @@
 # 认知版本控制 / Cognitive Version Control (CVC)
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338018.svg)](https://doi.org/10.5281/zenodo.24338018)
+[![CI](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml/badge.svg)](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
 > 长对话真正的问题不是“记不住”，而是“**不肯改**”。
 
 CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有账本，假设可撤销，结论会过期。**
 
-- 状态：`v0.1.0-draft`
+- 状态：`v0.1.1-draft`
 - 文档许可：**CC BY 4.0**
 - 代码许可：**MIT**
 - DOI：**10.5281/zenodo.24338018**
 - 作者：Dongze Li（GitHub: [@lidongze1002](https://github.com/lidongze1002)）
+- English: [`README.en.md`](README.en.md)
 
 ---
 
@@ -25,6 +28,8 @@ CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有
 | **无法度量** | 不知道到底有没有变好 | 三个指标 |
 
 一个真实案例见 [`examples/fx-case-study.md`](examples/fx-case-study.md)：人民币已经升到 6.66，回答却仍在沿用“贬值压力”的旧框架。
+
+对照正例见 [`examples/good-revision.md`](examples/good-revision.md)：同一轮完成修订，并解释错在哪一步。
 
 ---
 
@@ -75,12 +80,13 @@ CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有
 
 ### 3.1 分叉（Fork）
 
-从任意一条消息开分支，指定视角：
+从任意一条消息开分支，指定视角（共 5 种）：
 
-- **怀疑者**：只找漏洞
-- **历史学家**：只给先例
-- **反方**：必须给出相反结论
-- **外行**：禁止使用术语
+- **怀疑者**（skeptic）：只找漏洞
+- **历史学家**（historian）：只给先例
+- **反方**（contrarian）：必须给出相反结论
+- **外行**（layman）：禁止使用术语
+- **量化**（quant）：只给数字、区间和概率
 
 不是让一条线越走越深，而是让一棵树横向展开。
 
@@ -104,6 +110,27 @@ CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有
 python eval/convergence_metrics.py --demo
 ```
 
+```text
+CVC metrics (v0.1.1)
+-----------
+turns: 5
+concept_reuse_rate: 0.6
+frame_entropy: 0.8805
+belief_revision_latency: 4.0
+cvc_score: 0.4241
+unrevised_facts: ['F-017']
+
+Warnings:
+- concept_reuse_rate > 0.4: fixation starting, suggest new frames.
+- belief_revision_latency >= 3: belief stickiness, run reset protocol.
+```
+
+想看“健康”的样子：
+
+```bash
+python eval/convergence_metrics.py --demo-good
+```
+
 ---
 
 ## 5. 快速开始
@@ -116,6 +143,9 @@ python eval/convergence_metrics.py --demo
 - [`prompts/02-concept-ledger.md`](prompts/02-concept-ledger.md)
 - [`prompts/03-assumption-ledger.md`](prompts/03-assumption-ledger.md)
 - [`prompts/04-fork-lenses.md`](prompts/04-fork-lenses.md)
+- 英文版：[`prompts/en/00-reset-protocol.md`](prompts/en/00-reset-protocol.md)
+
+常见问题（原创性、和 RAG 的区别、是否商用）见 [`docs/faq.md`](docs/faq.md)。
 
 ---
 
@@ -143,6 +173,7 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 ## 8. 路线图
 
 - [x] v0.1.0：规范草案 + prompt 模板 + 指标脚本
+- [x] v0.1.1：单元测试、英文文档、FAQ、issue/PR 模板
 - [ ] v0.2.0：加入真实对话的标注样例与基线数据
 - [ ] v0.3.0：提供多模型适配（Claude / GPT / Gemini / 开源模型）
 - [ ] v0.4.0：对话分叉的参考实现（CLI）
@@ -151,7 +182,27 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 
 ## 9. 引用
 
-发布后请使用 Zenodo 给出的 DOI。格式见 [`CITATION.cff`](CITATION.cff)。
+```text
+Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
+Ledgers for Long LLM Conversations (v0.1.1). Zenodo.
+https://doi.org/10.5281/zenodo.24338018
+```
+
+BibTeX：
+
+```bibtex
+@misc{li2026cvc,
+  author       = {Li, Dongze},
+  title        = {Cognitive Version Control: Fact, Concept, and Assumption
+                  Ledgers for Long LLM Conversations},
+  year         = {2026},
+  version      = {0.1.1},
+  doi          = {10.5281/zenodo.24338018},
+  url          = {https://doi.org/10.5281/zenodo.24338018}
+}
+```
+
+格式见 [`CITATION.cff`](CITATION.cff)。
 
 ---
 
@@ -161,3 +212,13 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 - 代码：**MIT**（见 `LICENSE-CODE`）
 
 欢迎 fork、改编、商用，但请保留署名。
+
+---
+
+## 11. 贡献
+
+见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。最欢迎的三类反馈：
+
+1. **反例**：CVC 让对话变差的场景
+2. **prior art**：我们漏掉的论文或工具
+3. **数据**：带标注的长对话，用于校准指标阈值

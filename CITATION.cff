@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this framework, please cite it as below."
 title: "Cognitive Version Control: Fact, Concept, and Assumption Ledgers for Long LLM Conversations"
+type: software
 abstract: >-
   A lightweight specification and prompt toolkit for reducing premature
   convergence and belief-revision failure in long LLM conversations.
@@ -9,7 +10,7 @@ abstract: >-
 authors:
   - family-names: "Li"
     given-names: "Dongze"
-version: 0.1.0
+version: 0.1.1
 date-released: 2026-11-18
 doi: "10.5281/zenodo.24338018"
 license: CC-BY-4.0

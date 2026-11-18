@@ -1,0 +1,29 @@
+name: Prior art
+description: Point out earlier work that overlaps with CVC
+title: "[prior-art] "
+labels: ["prior-art"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Title
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link (paper, repo, blog)
+      placeholder: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: overlap
+    attributes:
+      label: What overlaps
+      description: Which part of CVC does it cover? (fact ledger / concept ledger / metrics / forking / ...)
+    validations:
+      required: true
+  - type: textarea
+    id: difference
+    attributes:
+      label: What is still different (if anything)
