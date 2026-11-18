@@ -1,0 +1,12 @@
+[
+  {"turn": 1, "concepts": ["美元指数", "中美利差", "贸易顺差", "结汇", "中间价"], "facts_introduced": [], "facts_revised": [], "note": "搭框架"},
+  {"turn": 2, "concepts": ["中美利差", "资本流动", "套息交易"], "facts_introduced": ["F-001"], "facts_revised": [], "note": "F-001：利差倒挂→人民币贬值压力"},
+  {"turn": 3, "concepts": ["中美利差", "贸易顺差", "美元指数"], "facts_introduced": [], "facts_revised": [], "note": ""},
+  {"turn": 4, "concepts": ["中美利差", "资本流动"], "facts_introduced": [], "facts_revised": [], "note": "选利差为最重要变量"},
+  {"turn": 5, "concepts": ["贸易顺差", "美元指数", "结汇"], "facts_introduced": ["F-002"], "facts_revised": [], "note": "承认升值，但用“阶段主导切换”解释，未标记旧结论过期"},
+  {"turn": 6, "concepts": ["中美利差", "贸易顺差", "美元指数"], "facts_introduced": [], "facts_revised": [], "note": "明确说“不矛盾”"},
+  {"turn": 7, "concepts": ["政策工具"], "facts_introduced": ["F-003"], "facts_revised": [], "note": "方向正确：上调=抑升值"},
+  {"turn": 8, "concepts": ["情景分析", "美元指数", "贸易顺差"], "facts_introduced": [], "facts_revised": [], "note": ""},
+  {"turn": 9, "concepts": ["套期保值", "自然对冲", "结汇"], "facts_introduced": [], "facts_revised": [], "note": ""},
+  {"turn": 10, "concepts": ["美元指数", "中美利差", "贸易顺差", "政策工具"], "facts_introduced": [], "facts_revised": [], "note": ""}
+]

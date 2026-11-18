@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.3] - 2026-11-18
+
+### Added
+
+- **First real A/C run** on `deepseek-v4-pro` (RMB topic, 10 turns each)
+- Raw transcripts and metadata (`data/raw/`)
+- Annotations (`data/annotations/`)
+- Results write-up (`docs/results.md`)
+- API runner (`experiments/run_deepseek.py`)
+
+### Findings
+
+- Explicit revision: C latency `0.0`, A `None`
+- Concept reuse: **no improvement** (A 0.633, C 0.636)
+- Entropy: slight increase (0.886 → 0.905)
+- Over-revision: C applied the revision rule to a policy explanation
+- Token cost: essentially equal (49.2k vs 49.5k)
+
+### Notes
+
+- n=1, one topic, one model, one non-blind annotator. Preliminary only.
+
 ## [0.2.2] - 2026-11-18
 
 ### Added

@@ -64,6 +64,21 @@ python eval/annotate.py --template transcript.jsonl --out annotation.json
 
 ---
 
+## 用 API 跑（可选）
+
+不想手动聊，可以直接用脚本跑：
+
+```bash
+export DEEPSEEK_API_KEY=...   # PowerShell: $env:DEEPSEEK_API_KEY='...'
+python experiments/run_deepseek.py --script experiments/scripts/01-rmb.json --condition A
+python experiments/run_deepseek.py --script experiments/scripts/01-rmb.json --condition C
+```
+
+输出在 `data/raw/`，同时记录模型、温度、token 用量。
+API key 只从环境变量读取，不会写入文件。
+
+---
+
 ## 每个主题跑几次
 
 最小可行：
