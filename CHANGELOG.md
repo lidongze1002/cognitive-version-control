@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2026-11-18
+
+### Added
+
+- Three 10-turn experiment scripts (`experiments/scripts/`)
+  - RMB: rate differential vs trade surplus
+  - Gold: geopolitics vs real rates
+  - Nvidia: export controls and governance vs demand
+- Experiment run sheet (`experiments/run_sheet.md`)
+- Transcript template (`experiments/transcript_template.jsonl`)
+- Script validation tests (10 turns, turn-5 conflict fact, no leakage words)
+
+### Changed
+
+- README roadmap now splits scripts (v0.2.1) from data/results (v0.2.2)
+
 ## [0.2.0] - 2026-11-18
 
 ### Added

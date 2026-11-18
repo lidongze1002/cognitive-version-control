@@ -8,7 +8,7 @@
 
 CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有账本，假设可撤销，结论会过期。**
 
-- 状态：`v0.2.0-draft`
+- 状态：`v0.2.1-draft`
 - 文档许可：**CC BY 4.0**
 - 代码许可：**MIT**
 - DOI：**10.5281/zenodo.24338017**（concept DOI；每个版本另有 version DOI）
@@ -152,6 +152,8 @@ python eval/convergence_metrics.py --demo-good
 - 标注手册：[`docs/annotation-guide.md`](docs/annotation-guide.md)
 - 实验协议：[`docs/experiment.md`](docs/experiment.md)
 - 标注工具：`python eval/annotate.py --template raw.jsonl --out annotation.json`
+- **现成脚本**：[`experiments/scripts/`](experiments/scripts/)（人民币、黄金、英伟达，各 10 轮）
+- 运行清单：[`experiments/run_sheet.md`](experiments/run_sheet.md)
 
 ---
 
@@ -181,7 +183,8 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 - [x] v0.1.0：规范草案 + prompt 模板 + 指标脚本
 - [x] v0.1.1：单元测试、英文文档、FAQ、issue/PR 模板
 - [x] v0.2.0：标注工具、标注手册、实验协议
-- [ ] v0.2.1：20 段标注对话 + 基线结果
+- [x] v0.2.1：3 个实验脚本 + 运行清单
+- [ ] v0.2.2：20 段标注对话 + 基线结果
 - [ ] v0.3.0：提供多模型适配（Claude / GPT / Gemini / 开源模型）
 - [ ] v0.4.0：对话分叉的参考实现（CLI）
 
@@ -191,7 +194,7 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.2.0). Zenodo.
+Ledgers for Long LLM Conversations (v0.2.1). Zenodo.
 https://doi.org/10.5281/zenodo.24338017
 ```
 
@@ -203,7 +206,7 @@ BibTeX：
   title        = {Cognitive Version Control: Fact, Concept, and Assumption
                   Ledgers for Long LLM Conversations},
   year         = {2026},
-  version      = {0.2.0},
+  version      = {0.2.1},
   doi          = {10.5281/zenodo.24338017},
   url          = {https://doi.org/10.5281/zenodo.24338017}
 }
