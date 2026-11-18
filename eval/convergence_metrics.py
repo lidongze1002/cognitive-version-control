@@ -33,7 +33,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
-__version__ = "0.1.1"
+__version__ = "0.2.0"
 
 
 class InputError(ValueError):

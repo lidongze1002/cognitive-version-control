@@ -1,6 +1,6 @@
 # 认知版本控制 / Cognitive Version Control (CVC)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338018.svg)](https://doi.org/10.5281/zenodo.24338018)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338017.svg)](https://doi.org/10.5281/zenodo.24338017)
 [![CI](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml/badge.svg)](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
@@ -8,10 +8,10 @@
 
 CVC 是一套给 LLM 长对话用的轻量规范：**事实有编号，概念有账本，假设可撤销，结论会过期。**
 
-- 状态：`v0.1.1-draft`
+- 状态：`v0.2.0-draft`
 - 文档许可：**CC BY 4.0**
 - 代码许可：**MIT**
-- DOI：**10.5281/zenodo.24338018**
+- DOI：**10.5281/zenodo.24338017**（concept DOI；每个版本另有 version DOI）
 - 作者：Dongze Li（GitHub: [@lidongze1002](https://github.com/lidongze1002)）
 - English: [`README.en.md`](README.en.md)
 
@@ -111,7 +111,7 @@ python eval/convergence_metrics.py --demo
 ```
 
 ```text
-CVC metrics (v0.1.1)
+CVC metrics (v0.2.0)
 -----------
 turns: 5
 concept_reuse_rate: 0.6
@@ -147,6 +147,12 @@ python eval/convergence_metrics.py --demo-good
 
 常见问题（原创性、和 RAG 的区别、是否商用）见 [`docs/faq.md`](docs/faq.md)。
 
+### 做实验
+
+- 标注手册：[`docs/annotation-guide.md`](docs/annotation-guide.md)
+- 实验协议：[`docs/experiment.md`](docs/experiment.md)
+- 标注工具：`python eval/annotate.py --template raw.jsonl --out annotation.json`
+
 ---
 
 ## 6. 非目标
@@ -174,7 +180,8 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 
 - [x] v0.1.0：规范草案 + prompt 模板 + 指标脚本
 - [x] v0.1.1：单元测试、英文文档、FAQ、issue/PR 模板
-- [ ] v0.2.0：加入真实对话的标注样例与基线数据
+- [x] v0.2.0：标注工具、标注手册、实验协议
+- [ ] v0.2.1：20 段标注对话 + 基线结果
 - [ ] v0.3.0：提供多模型适配（Claude / GPT / Gemini / 开源模型）
 - [ ] v0.4.0：对话分叉的参考实现（CLI）
 
@@ -184,8 +191,8 @@ CVC 的零件大多已有来源：belief revision、assumption-based planning、
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.1.1). Zenodo.
-https://doi.org/10.5281/zenodo.24338018
+Ledgers for Long LLM Conversations (v0.2.0). Zenodo.
+https://doi.org/10.5281/zenodo.24338017
 ```
 
 BibTeX：
@@ -196,9 +203,9 @@ BibTeX：
   title        = {Cognitive Version Control: Fact, Concept, and Assumption
                   Ledgers for Long LLM Conversations},
   year         = {2026},
-  version      = {0.1.1},
-  doi          = {10.5281/zenodo.24338018},
-  url          = {https://doi.org/10.5281/zenodo.24338018}
+  version      = {0.2.0},
+  doi          = {10.5281/zenodo.24338017},
+  url          = {https://doi.org/10.5281/zenodo.24338017}
 }
 ```
 

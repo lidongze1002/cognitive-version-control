@@ -61,12 +61,19 @@ v0.2.0 会用标注数据校准。欢迎提交你的数据。
 
 可以。文档 CC BY 4.0，代码 MIT，保留署名即可。
 
+## 概念 DOI 和版本 DOI 有什么区别？
+
+- **Concept DOI**（`10.5281/zenodo.24338017`）：指向整个项目，永远解析到**最新版本**。README 徽章、简历、项目主页用它。
+- **Version DOI**（例如 `10.5281/zenodo.24338950` 是 v0.1.1）：指向某个具体版本。论文引用具体版本时用它。
+
+两者都永久有效。新版本发布不会让旧 DOI 失效。
+
 ## 怎么引用？
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.1.1). Zenodo.
-https://doi.org/10.5281/zenodo.24338018
+Ledgers for Long LLM Conversations (v0.2.0). Zenodo.
+https://doi.org/10.5281/zenodo.24338017
 ```
 
 ## 为什么不叫“记忆框架”？

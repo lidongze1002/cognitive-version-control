@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2026-11-18
+
+### Added
+
+- Annotation helper (`eval/annotate.py`)
+  - `--template`: build a blank annotation file from raw JSONL
+  - `--check`: validate and compute metrics
+  - `--summary`: flag turns with no concepts
+- Annotation guide (`docs/annotation-guide.md`)
+- Experiment protocol (`docs/experiment.md`)
+- Raw conversation template (`eval/annotation_template.jsonl`)
+- Tests for the annotation helper
+
+### Changed
+
+- `CITATION.cff` and README now use the **concept DOI** (`10.5281/zenodo.24338017`)
+- FAQ explains concept DOI vs version DOI
+- CI runs an annotation smoke test
+
 ## [0.1.1] - 2026-11-18
 
 ### Added

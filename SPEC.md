@@ -1,4 +1,4 @@
-# CVC Specification v0.1.1
+# CVC Specification v0.2.0
 
 > 状态：Draft
 > 适用范围：任意长对话式 LLM 交互（人类用户 ↔ 模型，或 Agent ↔ Agent）
@@ -207,12 +207,23 @@ latency = 修订轮次 - 新事实出现轮次
 |---|---|---|
 | `v0.1.0` | 2026-11-18 | 初稿：三账本、分叉、三指标 |
 | `v0.1.1` | 2026-11-18 | 测试、英文文档、FAQ、输入校验 |
+| `v0.2.0` | 2026-11-18 | 标注工具、标注手册、实验协议 |
 
 ---
 
 ## 10. 评估协议
 
-指标的阈值目前是经验值。要把它变成可复现的结论，需要：
+完整的实验设计见 [`docs/experiment.md`](docs/experiment.md)，标注手册见 [`docs/annotation-guide.md`](docs/annotation-guide.md)。
+
+工具：
+
+```bash
+python eval/annotate.py --template raw.jsonl --out annotation.json
+python eval/annotate.py --check annotation.json
+python eval/annotate.py --summary annotation.json
+```
+
+指标阈值目前是经验值。要把它变成可复现的结论，需要：
 
 ### 10.1 标注单位
 

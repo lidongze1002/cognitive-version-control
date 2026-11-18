@@ -25,6 +25,12 @@ jobs:
       - name: Run sample data
         run: python eval/convergence_metrics.py --input eval/sample_data.json --json
 
+      - name: Annotation smoke test
+        run: |
+          python eval/annotate.py --template eval/annotation_template.jsonl --out /tmp/annotation.json
+          python eval/annotate.py --check /tmp/annotation.json
+          python eval/annotate.py --summary eval/sample_data.json
+
       - name: Validate JSON metadata
         run: |
           python - <<'PY'

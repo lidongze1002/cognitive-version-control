@@ -77,3 +77,29 @@ Invalid input exits with code `2` and a precise message.
 ```bash
 python -m unittest discover -s tests -v
 ```
+
+---
+
+# Annotation helper
+
+`eval/annotate.py` turns raw conversations into the turn format used by the
+metrics, and validates the result.
+
+```bash
+# 1. Build a blank annotation file from raw JSONL
+python eval/annotate.py --template eval/annotation_template.jsonl --out annotation.json
+
+# 2. Validate and print metrics
+python eval/annotate.py --check annotation.json
+
+# 3. Find turns with no concepts
+python eval/annotate.py --summary annotation.json
+```
+
+Raw JSONL format:
+
+```json
+{"turn": 1, "user": "...", "assistant": "..."}
+```
+
+See [`../docs/annotation-guide.md`](../docs/annotation-guide.md) for coding rules.

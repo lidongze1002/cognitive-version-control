@@ -1,6 +1,6 @@
 # Cognitive Version Control (CVC)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338018.svg)](https://doi.org/10.5281/zenodo.24338018)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24338017.svg)](https://doi.org/10.5281/zenodo.24338017)
 [![CI](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml/badge.svg)](https://github.com/lidongze1002/cognitive-version-control/actions/workflows/ci.yml)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 
@@ -10,10 +10,10 @@
 CVC is a lightweight specification for long LLM conversations:
 **facts get IDs, concepts get a ledger, assumptions can be revoked, and conclusions expire.**
 
-- Status: `v0.1.1-draft`
+- Status: `v0.2.0-draft`
 - Docs license: **CC BY 4.0**
 - Code license: **MIT**
-- DOI: **10.5281/zenodo.24338018**
+- DOI: **10.5281/zenodo.24338017** (concept DOI; each version also has a version DOI)
 
 ---
 
@@ -92,6 +92,12 @@ More templates:
 
 FAQ (originality, RAG, commercial use): [`docs/faq.md`](docs/faq.md).
 
+### Run an experiment
+
+- Annotation guide: [`docs/annotation-guide.md`](docs/annotation-guide.md)
+- Experiment protocol: [`docs/experiment.md`](docs/experiment.md)
+- Annotation tool: `python eval/annotate.py --template raw.jsonl --out annotation.json`
+
 ---
 
 ## 6. Non-goals
@@ -119,7 +125,8 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 
 - [x] v0.1.0: spec, prompts, metrics script
 - [x] v0.1.1: tests, English docs, FAQ, issue templates
-- [ ] v0.2.0: annotated conversation data and baselines
+- [x] v0.2.0: annotation tool, annotation guide, experiment protocol
+- [ ] v0.2.1: 20 annotated conversations + baseline results
 - [ ] v0.3.0: multi-model adapters (Claude / GPT / Gemini / open models)
 - [ ] v0.4.0: reference CLI for conversation forking
 
@@ -129,8 +136,8 @@ The components are not new: belief revision, assumption-based planning, MemGPT-s
 
 ```text
 Li, Dongze. (2026). Cognitive Version Control: Fact, Concept, and Assumption
-Ledgers for Long LLM Conversations (v0.1.1). Zenodo.
-https://doi.org/10.5281/zenodo.24338018
+Ledgers for Long LLM Conversations (v0.2.0). Zenodo.
+https://doi.org/10.5281/zenodo.24338017
 ```
 
 See [`CITATION.cff`](CITATION.cff).
